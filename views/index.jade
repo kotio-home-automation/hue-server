@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} 
+  h2 Last message:
+  pre #{message}
+  div
+    a(href="/findbridges") Find Bridges
+  div
+    a(href="/newuser") Create user
+  div
+    a(href="/isauthenticated") Authentication info
+  div
+    a(href="/getlights") Get Lights
+  div
+    a(href="/getgroups") Get Groups
+  div
+    a(href="/turnonall") Turn all on
+  div
+    a(href="/turnoffall") Turn all off

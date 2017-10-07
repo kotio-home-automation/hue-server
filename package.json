@@ -1,0 +1,41 @@
+{
+  "name": "kotio-hue-node-server",
+  "version": "1.0.0",
+  "description": "kotio Philips Hue REST server nodejs implementation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jorilytter/kotio.git"
+  },
+  "keywords": [
+    "kotio",
+    "home-automation",
+    "ruuvitag",
+    "sensors",
+    "hue"
+  ],
+  "author": "Ville Nuutinen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jorilytter/kotio/issues"
+  },
+  "homepage": "https://github.com/jorilytter/kotio#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "huejay": "^1.7.0",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "node-localstorage": "^1.3.0",
+    "serve-favicon": "~2.4.2"
+  }
+}
