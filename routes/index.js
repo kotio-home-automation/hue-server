@@ -55,13 +55,16 @@ router.get('/newuser', function(req, res, next) {
   user.deviceType = 'huejay';
   client.users.create(user).then(user => {
     console.log('new user created: ', user.username);
-    renderPage(res, JSON.stringify(user, null, '\t'));    
+    localStorage.setItem('clientip', client.bridge.ip);
+    localStorage.setItem('username', user.username);
+    renderPage(res, JSON.stringify("Paired with hub!", null, '\t'));
   }).catch(error => {
     if (error instanceof huejay.Error && error.type === 101) {
-      return console.log(`Link button not pressed. Try again...`);
+      renderPage(res, JSON.stringify("Link button on hue hub not pressed, please try again..", null, '\t'));      
+    } else {
+      console.log(error.stack);
+      renderPage(res, JSON.stringify(error, null, '\t'));    
     }
-    console.log(error.stack);
-    renderPage(res, JSON.stringify(error, null, '\t'));    
   });
 });
 
