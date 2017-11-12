@@ -1,17 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-let huejay = require('huejay');
+const huejay = require('huejay');
 
+const data = require('../hubdata.json');
+const clientip = data.clientip;
+const username = data.username;
 
-if (typeof localStorage === "undefined" || localStorage === null) {
-  var LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./hubdata');
-}
-
-var clientip = localStorage.getItem('clientip');
 var client;
-var username = localStorage.getItem('username');
 var user;
 
 /* GET home page. */
@@ -57,7 +53,7 @@ router.get('/newuser', function(req, res, next) {
     console.log('new user created: ', user.username);
     localStorage.setItem('clientip', client.bridge.ip);
     localStorage.setItem('username', user.username);
-    renderPage(res, JSON.stringify("Paired with hub!", null, '\t'));
+    renderPage(res, JSON.stringify("Paired with hub! Store these in 'hubdata.json' ClientIP: " + client.bridge.ip + " and the username is: '" + user.username + "'", null, '\t'));
   }).catch(error => {
     if (error instanceof huejay.Error && error.type === 101) {
       renderPage(res, JSON.stringify("Link button on hue hub not pressed, please try again..", null, '\t'));      
@@ -82,7 +78,6 @@ router.get('/isauthenticated', function(req, res, next) {
 router.get('/lights', function(req, res, next) {
   console.log('returning lights');
   client.lights.getAll().then(lights => {
-    console.log('Maybe?');
     res.json(lights);
   })
 });
@@ -96,7 +91,6 @@ router.get('/groups', function(req, res, next) {
 });
 
 router.post('/turnon', function(req, res, next) {
-  console.log(req.body);
   client.lights.getAll().then(lights => {
     for (let light of lights) {
       if (req.body.lights.indexOf(light.id) != -1) {
@@ -113,7 +107,6 @@ router.post('/turnon', function(req, res, next) {
 });
 
 router.post('/turnoff', function(req, res, next) {
-  console.log(req.body);
   client.lights.getAll().then(lights => {
     for (let light of lights) {
       if (req.body.lights.indexOf(light.id) != -1) {
@@ -167,7 +160,5 @@ router.get('/turnoffall', function(req, res, next) {
 function renderPage(res, message) {
   res.render('index', { title: 'Huejay test', message: message } );      
 }
-
-
 
 module.exports = router;
