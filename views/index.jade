@@ -3,6 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title} 
+  p To pair up to a hue hub, Press "Find Bridges" first.
+  p Then go and press the physical button on the hue hub and click "Create User"
+  p Once you get the authentication info, copy "hubdata.json.template" to "hubdata.json" and copy the authentication information into it.
+  p After the data is there, restart this server.
   h2 Last message:
   pre #{message}
   div

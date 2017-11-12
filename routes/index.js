@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
       username: username
     });
   }
-  res.render('index', { title: 'Huejay test', client: client, message: 'Press function' });
+  res.render('index', { title: 'Hue', client: client, message: 'Press function' });
 });
 
 router.get('/findbridges', function(req, res, next) {
